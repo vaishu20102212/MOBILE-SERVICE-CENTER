@@ -1,0 +1,853 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Priya Sharma (Admin)",
+      "email": "admin@fixmaster.com",
+      "role": "admin",
+      "phone": "9810012345",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+    },
+    {
+      "id": 2,
+      "name": "Rajesh Kumar (Receptionist)",
+      "email": "reception@fixmaster.com",
+      "role": "receptionist",
+      "phone": "9810023456",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+    },
+    {
+      "id": 3,
+      "name": "David Chen (Technician)",
+      "email": "david.tech@fixmaster.com",
+      "role": "technician",
+      "technicianId": 2,
+      "phone": "9822334455",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150"
+    },
+    {
+      "id": 4,
+      "name": "Ananya Iyer (Customer)",
+      "email": "ananya@example.com",
+      "role": "customer",
+      "customerId": 1,
+      "phone": "9876543210",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Ananya Iyer",
+      "phone": "9876543210",
+      "email": "ananya@example.com",
+      "address": "42 MG Road, Indiranagar, Bengaluru, KA 560038",
+      "registeredAt": "2026-10-15T09:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Vikram Malhotra",
+      "phone": "9845123456",
+      "email": "vikram@example.com",
+      "address": "12 Anna Salai, T. Nagar, Chennai, TN 600017",
+      "registeredAt": "2026-10-20T11:45:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Sneha Patel",
+      "phone": "9712345678",
+      "email": "sneha.p@example.com",
+      "address": "78 Hill Road, Bandra West, Mumbai, MH 400050",
+      "registeredAt": "2026-10-25T14:15:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Rahul Verma",
+      "phone": "9988776655",
+      "email": "rahul.v@example.com",
+      "address": "5 Sector 18, Wave City, Noida, UP 201301",
+      "registeredAt": "2026-11-01T16:20:00.000Z"
+    }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "brand": "Apple",
+      "model": "iPhone 15 Pro",
+      "imei": "354892019485721",
+      "serialNumber": "F2LX99K8PL",
+      "color": "Titanium Blue",
+      "warrantyStatus": "Under Warranty",
+      "warrantyStart": "2026-01-10",
+      "warrantyExpiry": "2027-01-09",
+      "registeredAt": "2026-10-15T09:35:00.000Z"
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "brand": "Samsung",
+      "model": "Galaxy S23 Ultra",
+      "imei": "867451029384756",
+      "serialNumber": "R5CW1039KDL",
+      "color": "Phantom Black",
+      "warrantyStatus": "Expired",
+      "warrantyStart": "2025-02-15",
+      "warrantyExpiry": "2026-02-14",
+      "registeredAt": "2026-10-16T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "customerId": 2,
+      "brand": "Google",
+      "model": "Pixel 8 Pro",
+      "imei": "356789012345678",
+      "serialNumber": "G9PK302910M",
+      "color": "Bay Blue",
+      "warrantyStatus": "Under Warranty",
+      "warrantyStart": "2026-05-12",
+      "warrantyExpiry": "2027-05-11",
+      "registeredAt": "2026-10-20T11:50:00.000Z"
+    },
+    {
+      "id": 4,
+      "customerId": 3,
+      "brand": "OnePlus",
+      "model": "OnePlus 12",
+      "imei": "869012345678901",
+      "serialNumber": "OP12K98765A",
+      "color": "Emerald Green",
+      "warrantyStatus": "Expired",
+      "warrantyStart": "2025-06-01",
+      "warrantyExpiry": "2026-06-01",
+      "registeredAt": "2026-10-25T14:20:00.000Z"
+    },
+    {
+      "id": 5,
+      "customerId": 4,
+      "brand": "Xiaomi",
+      "model": "Redmi Note 13 Pro+",
+      "imei": "864123098765432",
+      "serialNumber": "RN13P88992K",
+      "color": "Aurora Purple",
+      "warrantyStatus": "Under Warranty",
+      "warrantyStart": "2026-08-20",
+      "warrantyExpiry": "2027-08-19",
+      "registeredAt": "2026-11-01T16:25:00.000Z"
+    }
+  ],
+  "technicians": [
+    {
+      "id": 1,
+      "name": "Karthik Raman",
+      "email": "karthik.tech@fixmaster.com",
+      "phone": "9811223344",
+      "specialization": "Motherboard & Micro-soldering",
+      "status": "Available",
+      "activeJobs": 1,
+      "completedJobs": 42,
+      "rating": 4.9,
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150"
+    },
+    {
+      "id": 2,
+      "name": "David Chen",
+      "email": "david.tech@fixmaster.com",
+      "phone": "9822334455",
+      "specialization": "Screen & OLED Displays",
+      "status": "Busy",
+      "activeJobs": 2,
+      "completedJobs": 58,
+      "rating": 4.8,
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150"
+    },
+    {
+      "id": 3,
+      "name": "Pooja Hegde",
+      "email": "pooja.tech@fixmaster.com",
+      "phone": "9833445566",
+      "specialization": "Battery, Charging IC & Water Damage",
+      "status": "Available",
+      "activeJobs": 0,
+      "completedJobs": 36,
+      "rating": 4.7,
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150"
+    },
+    {
+      "id": 4,
+      "name": "Mohammed Farhan",
+      "email": "farhan.tech@fixmaster.com",
+      "phone": "9844556677",
+      "specialization": "Camera & Sensor Diagnostics",
+      "status": "On Leave",
+      "activeJobs": 0,
+      "completedJobs": 29,
+      "rating": 4.6,
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150"
+    }
+  ],
+  "serviceRequests": [
+    {
+      "id": 1,
+      "requestNumber": "SR-2026-001",
+      "customerId": 1,
+      "deviceId": 1,
+      "issueTitle": "Display glass shattered and vertical green lines",
+      "issueCategory": "Screen / Display",
+      "priority": "High",
+      "status": "Repair in Progress",
+      "estimatedCost": 14000,
+      "createdAt": "2026-11-03T10:15:00.000Z",
+      "jobCardNumber": "JC-2026-001"
+    },
+    {
+      "id": 2,
+      "requestNumber": "SR-2026-002",
+      "customerId": 2,
+      "deviceId": 3,
+      "issueTitle": "Device not charging, loose USB-C socket",
+      "issueCategory": "Charging Port",
+      "priority": "Medium",
+      "status": "Quality Check",
+      "estimatedCost": 2200,
+      "createdAt": "2026-11-03T11:30:00.000Z",
+      "jobCardNumber": "JC-2026-002"
+    },
+    {
+      "id": 3,
+      "requestNumber": "SR-2026-003",
+      "customerId": 3,
+      "deviceId": 4,
+      "issueTitle": "Sudden shutdown, motherboard overheating",
+      "issueCategory": "Motherboard / IC",
+      "priority": "High",
+      "status": "Delivered",
+      "estimatedCost": 4200,
+      "createdAt": "2026-11-01T14:00:00.000Z",
+      "jobCardNumber": "JC-2026-003"
+    },
+    {
+      "id": 4,
+      "requestNumber": "SR-2026-004",
+      "customerId": 4,
+      "deviceId": 5,
+      "issueTitle": "Water splash into speaker grille and crackling audio",
+      "issueCategory": "Audio / Speaker",
+      "priority": "Medium",
+      "status": "Job Card Created",
+      "estimatedCost": 1800,
+      "createdAt": "2026-11-05T09:00:00.000Z",
+      "jobCardNumber": "JC-2026-004"
+    },
+    {
+      "id": 5,
+      "requestNumber": "SR-2026-005",
+      "customerId": 1,
+      "deviceId": 2,
+      "issueTitle": "Battery drains within 2 hours, rear panel bulging slightly",
+      "issueCategory": "Battery",
+      "priority": "High",
+      "status": "Diagnosis",
+      "estimatedCost": 4500,
+      "createdAt": "2026-11-05T09:45:00.000Z",
+      "jobCardNumber": "JC-2026-005"
+    }
+  ],
+  "jobCards": [
+    {
+      "id": 1,
+      "jobCardNumber": "JC-2026-001",
+      "serviceRequestId": 1,
+      "customerId": 1,
+      "customerName": "Ananya Iyer",
+      "customerPhone": "9876543210",
+      "deviceId": 1,
+      "deviceModel": "iPhone 15 Pro",
+      "imei": "354892019485721",
+      "warrantyCovered": true,
+      "technicianId": 2,
+      "technicianName": "David Chen",
+      "status": "Repair in Progress",
+      "priority": "High",
+      "issueDescription": "Display glass shattered and vertical green lines after drop on pavement.",
+      "diagnosisNotes": "OLED matrix damaged. Digitizer flex torn. Logic board and FaceID sensor intact.",
+      "repairNotes": "Dismantled front panel. Installed OEM OLED assembly and new waterproof gasket. Performing screen calibration.",
+      "partsUsed": [
+        {
+          "partId": 1,
+          "partCode": "DISP-IP15P-01",
+          "name": "iPhone 15 Pro OLED Display Assembly",
+          "quantity": 1,
+          "unitPrice": 12500,
+          "total": 12500
+        }
+      ],
+      "laborCost": 1500,
+      "partsCost": 12500,
+      "discount": 1500,
+      "taxRate": 18,
+      "totalCost": 14750,
+      "estimatedCompletion": "2026-11-06T18:00:00.000Z",
+      "createdAt": "2026-11-03T10:30:00.000Z",
+      "history": [
+        {
+          "status": "Device Received",
+          "timestamp": "2026-11-03T10:15:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Device checked in with visible screen crack."
+        },
+        {
+          "status": "Job Card Created",
+          "timestamp": "2026-11-03T10:30:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Job card JC-2026-001 generated."
+        },
+        {
+          "status": "Diagnosis",
+          "timestamp": "2026-11-03T14:00:00.000Z",
+          "updatedBy": "David Chen (Technician)",
+          "note": "Confirmed display replacement required."
+        },
+        {
+          "status": "Technician Assigned",
+          "timestamp": "2026-11-03T14:15:00.000Z",
+          "updatedBy": "Priya Sharma (Admin)",
+          "note": "Assigned to David Chen (Display Specialist)."
+        },
+        {
+          "status": "Repair in Progress",
+          "timestamp": "2026-11-04T09:30:00.000Z",
+          "updatedBy": "David Chen (Technician)",
+          "note": "Spare part requisitioned and repair started."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "jobCardNumber": "JC-2026-002",
+      "serviceRequestId": 2,
+      "customerId": 2,
+      "customerName": "Vikram Malhotra",
+      "customerPhone": "9845123456",
+      "deviceId": 3,
+      "deviceModel": "Pixel 8 Pro",
+      "imei": "356789012345678",
+      "warrantyCovered": true,
+      "technicianId": 1,
+      "technicianName": "Karthik Raman",
+      "status": "Quality Check",
+      "priority": "Medium",
+      "issueDescription": "Device not charging, loose USB-C socket.",
+      "diagnosisNotes": "USB-C port pins corroded and bent. Replaced port sub-board.",
+      "repairNotes": "Sub-board soldered and fast charging tested. Reassembled and passing current test at 30W.",
+      "partsUsed": [
+        {
+          "partId": 3,
+          "partCode": "PORT-USBC-UNIV",
+          "name": "USB-C Charging Flex Cable Board",
+          "quantity": 1,
+          "unitPrice": 1100,
+          "total": 1100
+        }
+      ],
+      "laborCost": 800,
+      "partsCost": 1100,
+      "discount": 200,
+      "taxRate": 18,
+      "totalCost": 2006,
+      "estimatedCompletion": "2026-11-05T17:00:00.000Z",
+      "createdAt": "2026-11-03T11:45:00.000Z",
+      "history": [
+        {
+          "status": "Device Received",
+          "timestamp": "2026-11-03T11:30:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Received with USB-C connection failure."
+        },
+        {
+          "status": "Job Card Created",
+          "timestamp": "2026-11-03T11:45:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Job card JC-2026-002 generated."
+        },
+        {
+          "status": "Diagnosis",
+          "timestamp": "2026-11-03T15:00:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "Port pins corroded."
+        },
+        {
+          "status": "Technician Assigned",
+          "timestamp": "2026-11-03T15:10:00.000Z",
+          "updatedBy": "Priya Sharma (Admin)",
+          "note": "Assigned to Karthik Raman."
+        },
+        {
+          "status": "Repair in Progress",
+          "timestamp": "2026-11-04T11:00:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "Soldering replacement port."
+        },
+        {
+          "status": "Quality Check",
+          "timestamp": "2026-11-05T09:15:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "30W Power Delivery and OTG verified."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "jobCardNumber": "JC-2026-003",
+      "serviceRequestId": 3,
+      "customerId": 3,
+      "customerName": "Sneha Patel",
+      "customerPhone": "9712345678",
+      "deviceId": 4,
+      "deviceModel": "OnePlus 12",
+      "imei": "869012345678901",
+      "warrantyCovered": false,
+      "technicianId": 1,
+      "technicianName": "Karthik Raman",
+      "status": "Delivered",
+      "priority": "High",
+      "issueDescription": "Sudden shutdown, motherboard overheating.",
+      "diagnosisNotes": "PMIC short circuit detected under thermal camera.",
+      "repairNotes": "Replaced PMIC chip and applied fresh thermal paste. Stress tested for 4 hours.",
+      "partsUsed": [
+        {
+          "partId": 5,
+          "partCode": "IC-PM8550-01",
+          "name": "OnePlus 12 Motherboard Power IC PM8550",
+          "quantity": 1,
+          "unitPrice": 2400,
+          "total": 2400
+        }
+      ],
+      "laborCost": 1200,
+      "partsCost": 2400,
+      "discount": 0,
+      "taxRate": 18,
+      "totalCost": 4248,
+      "estimatedCompletion": "2026-11-04T16:00:00.000Z",
+      "actualCompletion": "2026-11-04T15:30:00.000Z",
+      "createdAt": "2026-11-01T14:15:00.000Z",
+      "history": [
+        {
+          "status": "Device Received",
+          "timestamp": "2026-11-01T14:00:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Checked in."
+        },
+        {
+          "status": "Job Card Created",
+          "timestamp": "2026-11-01T14:15:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Created."
+        },
+        {
+          "status": "Diagnosis",
+          "timestamp": "2026-11-02T10:00:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "PMIC short circuit."
+        },
+        {
+          "status": "Technician Assigned",
+          "timestamp": "2026-11-02T10:15:00.000Z",
+          "updatedBy": "Priya Sharma (Admin)",
+          "note": "Assigned."
+        },
+        {
+          "status": "Repair in Progress",
+          "timestamp": "2026-11-03T11:00:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "Micro-soldering PMIC."
+        },
+        {
+          "status": "Quality Check",
+          "timestamp": "2026-11-04T12:00:00.000Z",
+          "updatedBy": "Karthik Raman (Technician)",
+          "note": "Thermal benchmark passed."
+        },
+        {
+          "status": "Ready for Pickup",
+          "timestamp": "2026-11-04T14:00:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Customer notified via SMS."
+        },
+        {
+          "status": "Delivered",
+          "timestamp": "2026-11-04T17:30:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Handed over to customer Sneha Patel. Payment confirmed."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "jobCardNumber": "JC-2026-004",
+      "serviceRequestId": 4,
+      "customerId": 4,
+      "customerName": "Rahul Verma",
+      "customerPhone": "9988776655",
+      "deviceId": 5,
+      "deviceModel": "Redmi Note 13 Pro+",
+      "imei": "864123098765432",
+      "warrantyCovered": true,
+      "technicianId": null,
+      "technicianName": null,
+      "status": "Job Card Created",
+      "priority": "Medium",
+      "issueDescription": "Water splash into speaker grille and crackling audio.",
+      "diagnosisNotes": "",
+      "repairNotes": "",
+      "partsUsed": [],
+      "laborCost": 500,
+      "partsCost": 0,
+      "discount": 0,
+      "taxRate": 18,
+      "totalCost": 590,
+      "estimatedCompletion": "2026-11-07T14:00:00.000Z",
+      "createdAt": "2026-11-05T09:10:00.000Z",
+      "history": [
+        {
+          "status": "Device Received",
+          "timestamp": "2026-11-05T09:00:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Device received at service counter."
+        },
+        {
+          "status": "Job Card Created",
+          "timestamp": "2026-11-05T09:10:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Awaiting technician assignment and initial diagnosis."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "jobCardNumber": "JC-2026-005",
+      "serviceRequestId": 5,
+      "customerId": 1,
+      "customerName": "Ananya Iyer",
+      "customerPhone": "9876543210",
+      "deviceId": 2,
+      "deviceModel": "Galaxy S23 Ultra",
+      "imei": "867451029384756",
+      "warrantyCovered": false,
+      "technicianId": 2,
+      "technicianName": "David Chen",
+      "status": "Diagnosis",
+      "priority": "High",
+      "issueDescription": "Battery drains within 2 hours, rear panel bulging slightly.",
+      "diagnosisNotes": "Li-ion cell swollen to 130% volume. Immediate battery replacement recommended for safety.",
+      "repairNotes": "",
+      "partsUsed": [],
+      "laborCost": 600,
+      "partsCost": 3200,
+      "discount": 0,
+      "taxRate": 18,
+      "totalCost": 4484,
+      "estimatedCompletion": "2026-11-06T12:00:00.000Z",
+      "createdAt": "2026-11-05T09:50:00.000Z",
+      "history": [
+        {
+          "status": "Device Received",
+          "timestamp": "2026-11-05T09:45:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Bulging battery reported."
+        },
+        {
+          "status": "Job Card Created",
+          "timestamp": "2026-11-05T09:50:00.000Z",
+          "updatedBy": "Rajesh Kumar (Receptionist)",
+          "note": "Urgent safety flag added."
+        },
+        {
+          "status": "Diagnosis",
+          "timestamp": "2026-11-05T10:10:00.000Z",
+          "updatedBy": "David Chen (Technician)",
+          "note": "Battery replacement quoted to customer."
+        }
+      ]
+    }
+  ],
+  "spareParts": [
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro OLED Display Assembly",
+      "partCode": "DISP-IP15P-01",
+      "category": "Display",
+      "compatibleBrands": ["Apple"],
+      "compatibleModels": ["iPhone 15 Pro"],
+      "stockQuantity": 4,
+      "minThreshold": 5,
+      "unitPrice": 12500,
+      "costPrice": 9800,
+      "locationRack": "Rack A-12",
+      "warrantyMonths": 6,
+      "lastRestocked": "2026-10-10"
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S23 Ultra Battery 5000mAh",
+      "partCode": "BATT-SGS23U-02",
+      "category": "Battery",
+      "compatibleBrands": ["Samsung"],
+      "compatibleModels": ["Galaxy S23 Ultra"],
+      "stockQuantity": 12,
+      "minThreshold": 5,
+      "unitPrice": 3200,
+      "costPrice": 2100,
+      "locationRack": "Rack B-04",
+      "warrantyMonths": 6,
+      "lastRestocked": "2026-10-28"
+    },
+    {
+      "id": 3,
+      "name": "USB-C Charging Flex Cable Board",
+      "partCode": "PORT-USBC-UNIV",
+      "category": "Charging Port",
+      "compatibleBrands": ["Samsung", "Google", "OnePlus", "Xiaomi"],
+      "compatibleModels": ["Galaxy S23 Ultra", "Pixel 8 Pro", "OnePlus 12", "Redmi Note 13 Pro+"],
+      "stockQuantity": 2,
+      "minThreshold": 5,
+      "unitPrice": 1100,
+      "costPrice": 600,
+      "locationRack": "Rack C-08",
+      "warrantyMonths": 3,
+      "lastRestocked": "2026-09-15"
+    },
+    {
+      "id": 4,
+      "name": "Pixel 8 Pro Rear Camera Module 50MP",
+      "partCode": "CAM-PX8P-50M",
+      "category": "Camera",
+      "compatibleBrands": ["Google"],
+      "compatibleModels": ["Pixel 8 Pro"],
+      "stockQuantity": 3,
+      "minThreshold": 5,
+      "unitPrice": 5800,
+      "costPrice": 4200,
+      "locationRack": "Rack A-07",
+      "warrantyMonths": 6,
+      "lastRestocked": "2026-10-02"
+    },
+    {
+      "id": 5,
+      "name": "OnePlus 12 Motherboard Power IC PM8550",
+      "partCode": "IC-PM8550-01",
+      "category": "IC & Motherboard",
+      "compatibleBrands": ["OnePlus", "Xiaomi"],
+      "compatibleModels": ["OnePlus 12"],
+      "stockQuantity": 15,
+      "minThreshold": 4,
+      "unitPrice": 2400,
+      "costPrice": 1500,
+      "locationRack": "Rack D-02",
+      "warrantyMonths": 3,
+      "lastRestocked": "2026-10-18"
+    },
+    {
+      "id": 6,
+      "name": "Universal Waterproof Adhesive Sealant Tape",
+      "partCode": "SEAL-UNIV-WP",
+      "category": "Accessories & Consumables",
+      "compatibleBrands": ["Apple", "Samsung", "Google", "OnePlus", "Xiaomi"],
+      "compatibleModels": ["All Models"],
+      "stockQuantity": 48,
+      "minThreshold": 10,
+      "unitPrice": 450,
+      "costPrice": 180,
+      "locationRack": "Rack E-01",
+      "warrantyMonths": 1,
+      "lastRestocked": "2026-10-25"
+    },
+    {
+      "id": 7,
+      "name": "Redmi Note 13 Pro+ Ear Speaker & Mesh",
+      "partCode": "SPK-RN13P-01",
+      "category": "Audio & Speaker",
+      "compatibleBrands": ["Xiaomi"],
+      "compatibleModels": ["Redmi Note 13 Pro+"],
+      "stockQuantity": 7,
+      "minThreshold": 3,
+      "unitPrice": 650,
+      "costPrice": 300,
+      "locationRack": "Rack C-02",
+      "warrantyMonths": 3,
+      "lastRestocked": "2026-10-30"
+    }
+  ],
+  "inventoryTransactions": [
+    {
+      "id": 1,
+      "partId": 1,
+      "partName": "iPhone 15 Pro OLED Display Assembly",
+      "type": "OUT",
+      "quantity": 1,
+      "reason": "Used in Job Card JC-2026-001",
+      "referenceJobCard": "JC-2026-001",
+      "date": "2026-11-04T10:15:00.000Z",
+      "performedBy": "David Chen (Technician)"
+    },
+    {
+      "id": 2,
+      "partId": 3,
+      "partName": "USB-C Charging Flex Cable Board",
+      "type": "OUT",
+      "quantity": 1,
+      "reason": "Used in Job Card JC-2026-002",
+      "referenceJobCard": "JC-2026-002",
+      "date": "2026-11-04T11:30:00.000Z",
+      "performedBy": "Karthik Raman (Technician)"
+    },
+    {
+      "id": 3,
+      "partId": 5,
+      "partName": "OnePlus 12 Motherboard Power IC PM8550",
+      "type": "OUT",
+      "quantity": 1,
+      "reason": "Used in Job Card JC-2026-003",
+      "referenceJobCard": "JC-2026-003",
+      "date": "2026-11-03T11:15:00.000Z",
+      "performedBy": "Karthik Raman (Technician)"
+    },
+    {
+      "id": 4,
+      "partId": 2,
+      "partName": "Samsung Galaxy S23 Ultra Battery 5000mAh",
+      "type": "IN",
+      "quantity": 12,
+      "reason": "Bulk supplier restock from OEM Direct",
+      "referenceJobCard": null,
+      "date": "2026-10-28T14:00:00.000Z",
+      "performedBy": "Priya Sharma (Admin)"
+    }
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "invoiceNumber": "INV-2026-001",
+      "jobCardNumber": "JC-2026-003",
+      "customerId": 3,
+      "customerName": "Sneha Patel",
+      "customerPhone": "9712345678",
+      "deviceModel": "OnePlus 12",
+      "imei": "869012345678901",
+      "laborCost": 1200,
+      "partsCost": 2400,
+      "subtotal": 3600,
+      "discount": 0,
+      "taxRate": 18,
+      "taxAmount": 648,
+      "totalAmount": 4248,
+      "paymentStatus": "Paid",
+      "paymentMethod": "UPI",
+      "date": "2026-11-04T17:15:00.000Z",
+      "dueDate": "2026-11-04T23:59:59.000Z",
+      "notes": "PMIC Chip replaced. Comes with 90-day FixMaster warranty."
+    },
+    {
+      "id": 2,
+      "invoiceNumber": "INV-2026-002",
+      "jobCardNumber": "JC-2026-001",
+      "customerId": 1,
+      "customerName": "Ananya Iyer",
+      "customerPhone": "9876543210",
+      "deviceModel": "iPhone 15 Pro",
+      "imei": "354892019485721",
+      "laborCost": 1500,
+      "partsCost": 12500,
+      "subtotal": 14000,
+      "discount": 1500,
+      "taxRate": 18,
+      "taxAmount": 2250,
+      "totalAmount": 14750,
+      "paymentStatus": "Pending",
+      "paymentMethod": null,
+      "date": "2026-11-05T10:00:00.000Z",
+      "dueDate": "2026-11-07T23:59:59.000Z",
+      "notes": "Under warranty - labor cost waived. OEM Display replacement."
+    },
+    {
+      "id": 3,
+      "invoiceNumber": "INV-2026-003",
+      "jobCardNumber": "JC-2026-002",
+      "customerId": 2,
+      "customerName": "Vikram Malhotra",
+      "customerPhone": "9845123456",
+      "deviceModel": "Pixel 8 Pro",
+      "imei": "356789012345678",
+      "laborCost": 800,
+      "partsCost": 1100,
+      "subtotal": 1900,
+      "discount": 200,
+      "taxRate": 18,
+      "taxAmount": 306,
+      "totalAmount": 2006,
+      "paymentStatus": "Pending",
+      "paymentMethod": null,
+      "date": "2026-11-05T09:30:00.000Z",
+      "dueDate": "2026-11-06T23:59:59.000Z",
+      "notes": "USB-C flex replacement in final quality testing."
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "paymentId": "PAY-2026-001",
+      "invoiceId": 1,
+      "invoiceNumber": "INV-2026-001",
+      "customerName": "Sneha Patel",
+      "amount": 4248,
+      "paymentMethod": "UPI",
+      "transactionRef": "UPI-GPay-982144321098",
+      "status": "Completed",
+      "paymentDate": "2026-11-04T17:25:00.000Z",
+      "receivedBy": "Rajesh Kumar (Receptionist)"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "action": "Device Received",
+      "description": "Redmi Note 13 Pro+ checked in for water damage inspection",
+      "timestamp": "2026-11-05T09:00:00.000Z",
+      "user": "Rajesh Kumar",
+      "role": "Receptionist"
+    },
+    {
+      "id": 2,
+      "action": "Diagnosis Added",
+      "description": "David Chen diagnosed swollen battery on Galaxy S23 Ultra (JC-2026-005)",
+      "timestamp": "2026-11-05T10:10:00.000Z",
+      "user": "David Chen",
+      "role": "Technician"
+    },
+    {
+      "id": 3,
+      "action": "Quality Passed",
+      "description": "Karthik Raman completed quality test on Pixel 8 Pro (JC-2026-002)",
+      "timestamp": "2026-11-05T09:15:00.000Z",
+      "user": "Karthik Raman",
+      "role": "Technician"
+    },
+    {
+      "id": 4,
+      "action": "Payment Received",
+      "description": "Received ₹4,248 via UPI for Invoice INV-2026-001 from Sneha Patel",
+      "timestamp": "2026-11-04T17:25:00.000Z",
+      "user": "Rajesh Kumar",
+      "role": "Receptionist"
+    },
+    {
+      "id": 5,
+      "action": "Low Stock Warning",
+      "description": "USB-C Charging Flex Cable Board is running low (2 units left)",
+      "timestamp": "2026-11-04T11:35:00.000Z",
+      "user": "System Alert",
+      "role": "Inventory"
+    }
+  ]
+}
