@@ -8,7 +8,7 @@ const middlewares = jsonServer.defaults({
   noCors: false,
 });
 
-// Explicit CORS headers allowing both localhost and the live onrender domain
+// Explicit CORS headers
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
@@ -19,27 +19,15 @@ app.use((req, res, next) => {
   next();
 });
 
-// Default json-server middlewares (cors, static, logger)
+// Default json-server middlewares (cors, static assets from dist/, logger)
 app.use(middlewares);
 
-// Mount JSON API at /api
+// Mount JSON API exclusively at /api
 app.use('/api', router);
 
-// Also mount at root for backward compatibility
-app.use(router);
-
-// Single Page Application (SPA) routing fallback:
-// Any request that is not an API call returns dist/index.html
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    return next();
-  }
-  const indexPath = path.join(__dirname, 'dist', 'index.html');
-  res.sendFile(indexPath, (err) => {
-    if (err) {
-      res.status(500).send('Frontend bundle index.html not found. Please run npm run build first.');
-    }
-  });
+// Single Page Application (SPA) routing fallback for all frontend client routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 10000;
