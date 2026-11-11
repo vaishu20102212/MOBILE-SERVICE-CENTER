@@ -149,9 +149,9 @@ export default function CustomerPortalPage() {
                 </p>
               </div>
 
-              <div className="text-right">
+              <div className="text-left sm:text-right">
                 <span className="text-xs text-slate-400">Estimated Repair Total</span>
-                <p className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                <p className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                   {formatCurrency(activeJobCard.totalCost)}
                 </p>
                 {activeJobCard.warrantyCovered && (

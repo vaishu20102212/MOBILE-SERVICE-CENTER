@@ -22,7 +22,7 @@ export default function Modal({ isOpen, onClose, title, subtitle, children, maxW
 
       <div className="flex min-h-full items-center justify-center p-2 sm:p-4 text-center">
         <div
-          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-slate-200 dark:border-slate-800`}
+          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all my-2 sm:my-8 w-full max-w-[95vw] ${maxWidth} border border-slate-200 dark:border-slate-800`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}

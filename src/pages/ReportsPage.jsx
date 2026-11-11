@@ -13,7 +13,10 @@ import {
   CheckCircle2,
   AlertTriangle,
   TrendingUp,
-  Search
+  Search,
+  Star,
+  Receipt,
+  UserCheck
 } from 'lucide-react';
 import {
   serviceRequestsApi,
@@ -106,11 +109,11 @@ export default function ReportsPage() {
   if (loading) return <LoadingSpinner text="Compiling analytical business reports..." />;
 
   const tabs = [
-    { id: 'requests', label: 'Service Request Report', icon: Smartphone },
-    { id: 'technicians', label: 'Technician Workload Report', icon: Wrench },
-    { id: 'inventory', label: 'Spare Parts & Inventory Report', icon: Boxes },
-    { id: 'revenue', label: 'Revenue & Payment Report', icon: DollarSign },
-    { id: 'history', label: 'Customer Service History', icon: Users },
+    { id: 'requests', label: 'Service Requests', icon: Smartphone },
+    { id: 'technicians', label: 'Technician Workload', icon: Wrench },
+    { id: 'inventory', label: 'Spare Parts & Assets', icon: Boxes },
+    { id: 'revenue', label: 'Revenue & Invoices', icon: DollarSign },
+    { id: 'history', label: 'Customer History', icon: Users },
   ];
 
   return (
@@ -118,11 +121,11 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
             <BarChart3 className="w-6 h-6 text-blue-600" />
             Executive Reports & Analytics
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             Exportable insights on repair workflows, technician workloads, inventory valuation, and sales.
           </p>
         </div>
@@ -130,16 +133,16 @@ export default function ReportsPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-100 transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition shadow-xs"
           >
             <Printer className="w-4 h-4" />
-            <span>Print Current Report</span>
+            <span>Print Report</span>
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-auto border-b border-slate-200 dark:border-slate-800 text-sm font-semibold pb-1">
+      <div className="flex overflow-x-auto border-b border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold pb-1 gap-1">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -147,13 +150,13 @@ export default function ReportsPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 pb-3 px-4 border-b-2 whitespace-nowrap transition ${
+              className={`flex items-center gap-2 pb-3 px-3 sm:px-4 border-b-2 whitespace-nowrap transition cursor-pointer ${
                 isActive
                   ? 'border-blue-600 text-blue-600 font-bold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-4 h-4 shrink-0" />
               <span>{tab.label}</span>
             </button>
           );
@@ -163,9 +166,9 @@ export default function ReportsPage() {
       {/* TAB 1: Service Request Report */}
       {activeTab === 'requests' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white">Service Requests Summary</h3>
+              <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Service Requests Summary</h3>
               <p className="text-xs text-slate-400">All intake logs and their current workflow states</p>
             </div>
             <button
@@ -184,16 +187,43 @@ export default function ReportsPage() {
                   }))
                 )
               }
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition"
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-sm cursor-pointer shrink-0"
             >
               <Download className="w-4 h-4" />
               <span>Export CSV</span>
             </button>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden shadow-xs">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+          {/* Mobile Card View (< md) */}
+          <div className="md:hidden space-y-3">
+            {requests.length === 0 ? (
+              <div className="bg-white dark:bg-slate-900 p-8 text-center rounded-2xl border text-slate-400 text-xs">
+                No service requests recorded.
+              </div>
+            ) : (
+              requests.map((r) => (
+                <div key={r.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-blue-600 dark:text-blue-400">{r.requestNumber}</span>
+                    <StatusBadge status={r.status} size="xs" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">{r.issueTitle}</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Category: <span className="font-semibold text-slate-700 dark:text-slate-300">{r.issueCategory}</span></p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                    <span className="text-slate-400">JC: <b className="font-mono text-slate-700 dark:text-slate-300">{r.jobCardNumber || 'N/A'}</b></span>
+                    <span className="font-extrabold text-slate-900 dark:text-white">{formatCurrency(r.estimatedCost)}</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto shadow-xs">
+            <table className="w-full text-left text-xs min-w-[700px]">
+              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-4 py-3">Req #</th>
                   <th className="px-4 py-3">Category</th>
@@ -204,9 +234,9 @@ export default function ReportsPage() {
                   <th className="px-4 py-3 text-right">Estimate</th>
                 </tr>
               </thead>
-              <tbody className="divide-y font-medium">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {requests.map((r) => (
-                  <tr key={r.id}>
+                  <tr key={r.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
                     <td className="px-4 py-3 font-mono font-bold text-blue-600">{r.requestNumber}</td>
                     <td className="px-4 py-3">{r.issueCategory}</td>
                     <td className="px-4 py-3 font-semibold text-slate-800 dark:text-slate-100">{r.issueTitle}</td>
@@ -225,9 +255,9 @@ export default function ReportsPage() {
       {/* TAB 2: Technician Workload Report */}
       {activeTab === 'technicians' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white">Technician Productivity & Workload</h3>
+              <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Technician Productivity & Workload</h3>
               <p className="text-xs text-slate-400">Active repair queues vs completed jobs</p>
             </div>
             <button
@@ -250,16 +280,56 @@ export default function ReportsPage() {
                   })
                 )
               }
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition"
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-sm cursor-pointer shrink-0"
             >
               <Download className="w-4 h-4" />
               <span>Export CSV</span>
             </button>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden shadow-xs">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+          {/* Mobile Card View (< md) */}
+          <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {technicians.map((t) => {
+              const activeJobs = jobCards.filter(
+                (j) => Number(j.technicianId) === Number(t.id) && !['Delivered', 'Cancelled', 'Repair Failed'].includes(j.status)
+              ).length;
+              return (
+                <div key={t.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <img src={t.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'} alt={t.name} className="w-9 h-9 rounded-full object-cover ring-1 ring-slate-200" />
+                      <div>
+                        <h4 className="font-bold text-sm text-slate-900 dark:text-white">{t.name}</h4>
+                        <p className="text-[11px] text-blue-600 font-semibold">{t.specialization}</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                      {t.status}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs">
+                    <div>
+                      <p className="text-[10px] text-slate-400">Active</p>
+                      <p className="font-extrabold text-blue-600">{activeJobs}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400">Completed</p>
+                      <p className="font-extrabold text-emerald-600">{t.completedJobs || 0}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400">Rating</p>
+                      <p className="font-extrabold text-amber-500">{t.rating || 4.8} ★</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto shadow-xs">
+            <table className="w-full text-left text-xs min-w-[650px]">
+              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-4 py-3">Technician</th>
                   <th className="px-4 py-3">Specialization</th>
@@ -269,14 +339,13 @@ export default function ReportsPage() {
                   <th className="px-4 py-3">Rating</th>
                 </tr>
               </thead>
-              <tbody className="divide-y font-medium">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {technicians.map((t) => {
                   const activeJobs = jobCards.filter(
                     (j) => Number(j.technicianId) === Number(t.id) && !['Delivered', 'Cancelled', 'Repair Failed'].includes(j.status)
                   ).length;
-
                   return (
-                    <tr key={t.id}>
+                    <tr key={t.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
                       <td className="px-4 py-3 font-bold text-slate-900 dark:text-white">{t.name}</td>
                       <td className="px-4 py-3">{t.specialization}</td>
                       <td className="px-4 py-3 font-semibold">{t.status}</td>
@@ -295,9 +364,9 @@ export default function ReportsPage() {
       {/* TAB 3: Spare Parts & Inventory Report */}
       {activeTab === 'inventory' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white">Warehouse Valuation & Stock Report</h3>
+              <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Warehouse Valuation & Stock Report</h3>
               <p className="text-xs text-slate-400">Inventory levels, unit values and safety reorder alerts</p>
             </div>
             <button
@@ -316,16 +385,47 @@ export default function ReportsPage() {
                   }))
                 )
               }
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition"
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-sm cursor-pointer shrink-0"
             >
               <Download className="w-4 h-4" />
               <span>Export CSV</span>
             </button>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden shadow-xs">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+          {/* Mobile Card View (< md) */}
+          <div className="md:hidden space-y-3">
+            {spareParts.map((sp) => {
+              const isLow = sp.stockQuantity <= (sp.minThreshold || 5);
+              return (
+                <div key={sp.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-blue-600 dark:text-blue-400">{sp.partCode}</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-semibold">{sp.category}</span>
+                  </div>
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">{sp.name}</h4>
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                    <div>
+                      <span className="text-slate-400">Stock: </span>
+                      <span className={`font-bold ${isLow ? 'text-rose-600' : 'text-slate-700 dark:text-slate-300'}`}>
+                        {sp.stockQuantity} units
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-slate-400 text-[10px]">Asset Value: </span>
+                      <span className="font-extrabold text-slate-900 dark:text-white">
+                        {formatCurrency(sp.stockQuantity * sp.unitPrice)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto shadow-xs">
+            <table className="w-full text-left text-xs min-w-[700px]">
+              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-4 py-3">Code</th>
                   <th className="px-4 py-3">Spare Part</th>
@@ -335,14 +435,14 @@ export default function ReportsPage() {
                   <th className="px-4 py-3 text-right">Total Asset Value</th>
                 </tr>
               </thead>
-              <tbody className="divide-y font-medium">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {spareParts.map((sp) => (
-                  <tr key={sp.id}>
+                  <tr key={sp.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
                     <td className="px-4 py-3 font-mono font-bold text-blue-600">{sp.partCode}</td>
                     <td className="px-4 py-3 font-semibold">{sp.name}</td>
                     <td className="px-4 py-3">{sp.category}</td>
                     <td className="px-4 py-3 font-bold">
-                      {sp.stockQuantity} units {sp.stockQuantity <= sp.minThreshold && '(Low)'}
+                      {sp.stockQuantity} units
                     </td>
                     <td className="px-4 py-3">{formatCurrency(sp.unitPrice)}</td>
                     <td className="px-4 py-3 text-right font-extrabold text-slate-900 dark:text-white">
@@ -359,9 +459,9 @@ export default function ReportsPage() {
       {/* TAB 4: Revenue & Payment Report */}
       {activeTab === 'revenue' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white">Revenue, Invoices & Collections</h3>
+              <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Revenue, Invoices & Collections</h3>
               <p className="text-xs text-slate-400">Total billings, tax collections and receivables</p>
             </div>
             <button
@@ -383,42 +483,65 @@ export default function ReportsPage() {
                   }))
                 )
               }
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition"
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-sm cursor-pointer shrink-0"
             >
               <Download className="w-4 h-4" />
               <span>Export CSV</span>
             </button>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden shadow-xs">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+          {/* Mobile Card View (< md) */}
+          <div className="md:hidden space-y-3">
+            {invoices.map((inv) => (
+              <div key={inv.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold text-blue-600 dark:text-blue-400">{inv.invoiceNumber}</span>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${inv.paymentStatus === 'Paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-800'}`}>
+                    {inv.paymentStatus}
+                  </span>
+                </div>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">{inv.customerName}</h4>
+                    <p className="text-xs text-slate-500">{inv.deviceModel}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-base font-extrabold text-blue-600 dark:text-blue-400">{formatCurrency(inv.totalAmount)}</span>
+                    <p className="text-[10px] text-slate-400">{inv.paymentMethod || 'UPI'}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto shadow-xs">
+            <table className="w-full text-left text-xs min-w-[700px]">
+              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-4 py-3">Invoice #</th>
                   <th className="px-4 py-3">Customer</th>
                   <th className="px-4 py-3">Device</th>
                   <th className="px-4 py-3">Labor</th>
                   <th className="px-4 py-3">Parts</th>
-                  <th className="px-4 py-3">Tax</th>
-                  <th className="px-4 py-3 text-right">Total</th>
-                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Total Payable</th>
                 </tr>
               </thead>
-              <tbody className="divide-y font-medium">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {invoices.map((inv) => (
-                  <tr key={inv.id}>
+                  <tr key={inv.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
                     <td className="px-4 py-3 font-mono font-bold text-blue-600">{inv.invoiceNumber}</td>
                     <td className="px-4 py-3 font-semibold">{inv.customerName}</td>
                     <td className="px-4 py-3">{inv.deviceModel}</td>
                     <td className="px-4 py-3">{formatCurrency(inv.laborCost)}</td>
                     <td className="px-4 py-3">{formatCurrency(inv.partsCost)}</td>
-                    <td className="px-4 py-3">{formatCurrency(inv.taxAmount)}</td>
-                    <td className="px-4 py-3 text-right font-extrabold">{formatCurrency(inv.totalAmount)}</td>
-                    <td className="px-4 py-3 text-center">
-                      <span className={`px-2 py-0.5 rounded-full font-bold ${inv.paymentStatus === 'Paid' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                    <td className="px-4 py-3">
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${inv.paymentStatus === 'Paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-800'}`}>
                         {inv.paymentStatus}
                       </span>
                     </td>
+                    <td className="px-4 py-3 text-right font-extrabold text-blue-600">{formatCurrency(inv.totalAmount)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -430,18 +553,18 @@ export default function ReportsPage() {
       {/* TAB 5: Customer Service History */}
       {activeTab === 'history' && (
         <div className="space-y-4">
-          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white">Customer Lifetime Service History</h3>
+              <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Customer Lifetime Service History</h3>
               <p className="text-xs text-slate-400">View past repairs, parts replaced and expenses per customer</p>
             </div>
 
             <div className="flex items-center gap-2">
-              <label className="text-xs font-bold text-slate-500">Select Customer:</label>
+              <label className="text-xs font-bold text-slate-500 shrink-0">Customer:</label>
               <select
                 value={selectedCustomerId}
                 onChange={(e) => setSelectedCustomerId(e.target.value)}
-                className="p-2 border rounded-xl text-xs bg-slate-50 dark:bg-slate-800 font-semibold"
+                className="w-full sm:w-auto p-2 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {customers.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -458,43 +581,47 @@ export default function ReportsPage() {
             const custJobs = jobCards.filter((jc) => String(jc.customerId) === String(selectedCustomerId));
 
             return (
-              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border space-y-4">
-                <div className="flex justify-between items-center pb-3 border-b text-xs">
+              <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+                <div className="flex flex-col sm:flex-row justify-between sm:items-center pb-3 border-b border-slate-100 dark:border-slate-800 gap-2 text-xs">
                   <div>
-                    <h4 className="font-bold text-base text-slate-900 dark:text-white">{cust?.name}</h4>
+                    <h4 className="font-bold text-base text-slate-900 dark:text-white">{cust?.name || 'Customer'}</h4>
                     <p className="text-slate-500">{cust?.phone} • {cust?.email} • {cust?.address}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-slate-400">Total Repairs Handled</p>
-                    <p className="text-lg font-extrabold text-blue-600">{custJobs.length} Jobs</p>
+                  <div className="text-left sm:text-right">
+                    <p className="text-slate-400 text-[10px]">Total Repairs Handled</p>
+                    <p className="text-base sm:text-lg font-extrabold text-blue-600">{custJobs.length} Jobs</p>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  {custJobs.map((cj) => (
-                    <div key={cj.id} className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border text-xs space-y-2">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono font-bold text-blue-600">{cj.jobCardNumber}</span>
-                          <span className="font-bold text-slate-900 dark:text-white">{cj.deviceModel}</span>
+                  {custJobs.length === 0 ? (
+                    <p className="text-xs text-slate-400 text-center py-6">No previous repair history for this customer.</p>
+                  ) : (
+                    custJobs.map((cj) => (
+                      <div key={cj.id} className="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 text-xs space-y-2">
+                        <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono font-bold text-blue-600">{cj.jobCardNumber}</span>
+                            <span className="font-bold text-slate-900 dark:text-white">{cj.deviceModel}</span>
+                          </div>
+                          <StatusBadge status={cj.status} size="xs" />
                         </div>
-                        <StatusBadge status={cj.status} />
-                      </div>
-                      <p className="text-slate-600 dark:text-slate-300">
-                        <span className="font-semibold text-slate-400">Issue:</span> {cj.issueDescription}
-                      </p>
-                      {cj.partsUsed && cj.partsUsed.length > 0 && (
-                        <p className="text-slate-500">
-                          <span className="font-semibold text-slate-400">Replaced Parts:</span>{' '}
-                          {cj.partsUsed.map((p) => `${p.name} (x${p.quantity})`).join(', ')}
+                        <p className="text-slate-600 dark:text-slate-300">
+                          <span className="font-semibold text-slate-400">Issue:</span> {cj.issueDescription}
                         </p>
-                      )}
-                      <div className="flex justify-between text-slate-400 pt-1 text-[11px]">
-                        <span>Technician: {cj.technicianName || 'Unassigned'}</span>
-                        <span className="font-bold text-slate-800 dark:text-slate-200">Total Billed: {formatCurrency(cj.totalCost)}</span>
+                        {cj.partsUsed && cj.partsUsed.length > 0 && (
+                          <p className="text-slate-500">
+                            <span className="font-semibold text-slate-400">Replaced Parts:</span>{' '}
+                            {cj.partsUsed.map((p) => `${p.name} (x${p.quantity})`).join(', ')}
+                          </p>
+                        )}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-slate-400 pt-1 text-[11px] gap-1">
+                          <span>Technician: <b className="text-slate-700 dark:text-slate-300">{cj.technicianName || 'Unassigned'}</b></span>
+                          <span className="font-bold text-slate-800 dark:text-slate-200">Total: {formatCurrency(cj.totalCost)}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  )}
                 </div>
               </div>
             );

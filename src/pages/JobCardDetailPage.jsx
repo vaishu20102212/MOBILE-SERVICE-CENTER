@@ -1010,10 +1010,10 @@ export default function JobCardDetailPage() {
 
             {/* Payment settlement button if pending */}
             {invoiceRecord.paymentStatus === 'Pending' ? (
-              <div className="bg-amber-50 p-4 rounded-xl border border-amber-200 flex items-center justify-between">
+              <div className="bg-amber-50 dark:bg-amber-950/40 p-4 rounded-xl border border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h4 className="text-xs font-bold text-amber-900">Record Settlement</h4>
-                  <p className="text-[11px] text-amber-700">
+                  <h4 className="text-xs font-bold text-amber-900 dark:text-amber-200">Record Settlement</h4>
+                  <p className="text-[11px] text-amber-700 dark:text-amber-300">
                     Simulate customer payment via UPI, Cash or Card
                   </p>
                 </div>
@@ -1031,7 +1031,7 @@ export default function JobCardDetailPage() {
                       notifyError(e.message);
                     }
                   }}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition text-center"
                 >
                   Pay ₹{invoiceRecord.totalAmount} (UPI)
                 </button>

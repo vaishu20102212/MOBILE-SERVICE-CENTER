@@ -379,59 +379,102 @@ export default function InventoryPage() {
         </div>
       ) : (
         /* Inventory Audit Log Tab */
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
-          <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-xs uppercase font-bold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-              <tr>
-                <th className="px-6 py-3.5">Type</th>
-                <th className="px-6 py-3.5">Part Name</th>
-                <th className="px-6 py-3.5">Quantity</th>
-                <th className="px-6 py-3.5">Reason / Reference</th>
-                <th className="px-6 py-3.5">Performed By</th>
-                <th className="px-6 py-3.5">Date & Time</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
-              {transactions.map((tx) => (
-                <tr key={tx.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
-                  <td className="px-6 py-4">
+        <div className="space-y-4">
+          {/* Mobile Card View (< md) */}
+          <div className="md:hidden space-y-3">
+            {transactions.length === 0 ? (
+              <div className="bg-white dark:bg-slate-900 p-8 text-center rounded-2xl border text-slate-400 text-xs">
+                No inventory transactions recorded.
+              </div>
+            ) : (
+              transactions.map((tx) => (
+                <div key={tx.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-2.5">
+                  <div className="flex items-center justify-between">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${
                         tx.type === 'IN'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                          : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
                       }`}
                     >
-                      {tx.type === 'IN' ? (
-                        <ArrowDownRight className="w-3.5 h-3.5" />
-                      ) : (
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      )}
+                      {tx.type === 'IN' ? <ArrowDownRight className="w-3.5 h-3.5" /> : <ArrowUpRight className="w-3.5 h-3.5" />}
                       <span>{tx.type}</span>
                     </span>
-                  </td>
-                  <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
-                    {tx.partName}
-                  </td>
-                  <td className="px-6 py-4 font-bold">
-                    {tx.type === 'IN' ? `+${tx.quantity}` : `-${tx.quantity}`}
-                  </td>
-                  <td className="px-6 py-4 text-xs text-slate-500">
-                    <p className="font-semibold text-slate-700 dark:text-slate-200">{tx.reason}</p>
+                    <span className="font-extrabold text-sm text-slate-900 dark:text-white">
+                      {tx.type === 'IN' ? `+${tx.quantity}` : `-${tx.quantity}`} units
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">{tx.partName}</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">{tx.reason}</p>
                     {tx.referenceJobCard && (
-                      <p className="font-mono text-blue-600">{tx.referenceJobCard}</p>
+                      <p className="font-mono text-xs text-blue-600 mt-0.5">Ref: {tx.referenceJobCard}</p>
                     )}
-                  </td>
-                  <td className="px-6 py-4 text-xs text-slate-500">
-                    {tx.performedBy || 'Staff'}
-                  </td>
-                  <td className="px-6 py-4 text-xs text-slate-400">
-                    {formatDateTime(tx.date)}
-                  </td>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>By: <b className="text-slate-600 dark:text-slate-300">{tx.performedBy || 'Staff'}</b></span>
+                    <span>{formatDateTime(tx.date)}</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto shadow-xs">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300 min-w-[700px]">
+              <thead className="bg-slate-50 dark:bg-slate-800/60 text-xs uppercase font-bold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                <tr>
+                  <th className="px-6 py-3.5">Type</th>
+                  <th className="px-6 py-3.5">Part Name</th>
+                  <th className="px-6 py-3.5">Quantity</th>
+                  <th className="px-6 py-3.5">Reason / Reference</th>
+                  <th className="px-6 py-3.5">Performed By</th>
+                  <th className="px-6 py-3.5">Date & Time</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
+                {transactions.map((tx) => (
+                  <tr key={tx.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition">
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
+                          tx.type === 'IN'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-amber-100 text-amber-800'
+                        }`}
+                      >
+                        {tx.type === 'IN' ? (
+                          <ArrowDownRight className="w-3.5 h-3.5" />
+                        ) : (
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        )}
+                        <span>{tx.type}</span>
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
+                      {tx.partName}
+                    </td>
+                    <td className="px-6 py-4 font-bold">
+                      {tx.type === 'IN' ? `+${tx.quantity}` : `-${tx.quantity}`}
+                    </td>
+                    <td className="px-6 py-4 text-xs text-slate-500">
+                      <p className="font-semibold text-slate-700 dark:text-slate-200">{tx.reason}</p>
+                      {tx.referenceJobCard && (
+                        <p className="font-mono text-blue-600">{tx.referenceJobCard}</p>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-xs text-slate-500">
+                      {tx.performedBy || 'Staff'}
+                    </td>
+                    <td className="px-6 py-4 text-xs text-slate-400">
+                      {formatDateTime(tx.date)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
