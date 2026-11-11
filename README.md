@@ -1,5 +1,9 @@
 # FixMaster - Mobile Service Center Management System
-**TASK 6 Submission - Submission Ready**
+**TASK 6 Submission - Live Production Ready**
+
+🌐 **Live Application URL:** [https://mobile-service-center-3.onrender.com](https://mobile-service-center-3.onrender.com)  
+📡 **Live REST API Endpoint:** [https://mobile-service-center-3.onrender.com/api](https://mobile-service-center-3.onrender.com/api)  
+📁 **GitHub Repository:** [https://github.com/vaishu20102212/MOBILE-SERVICE-CENTER](https://github.com/vaishu20102212/MOBILE-SERVICE-CENTER)
 
 FixMaster is an enterprise-grade Single Page Application (SPA) designed for mobile device service centers to manage customer records, smartphone devices, repair workflows, technician workloads, spare parts inventory, billing/invoicing, and executive business reports.
 

@@ -8,6 +8,17 @@ const middlewares = jsonServer.defaults({
   noCors: false,
 });
 
+// Explicit CORS headers allowing both localhost and the live onrender domain
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // Default json-server middlewares (cors, static, logger)
 app.use(middlewares);
 
@@ -37,6 +48,7 @@ const HOST = '0.0.0.0';
 app.listen(PORT, HOST, () => {
   console.log(`===============================================`);
   console.log(`FixMaster Production Server is LIVE!`);
+  console.log(`Live URL: https://mobile-service-center-3.onrender.com`);
   console.log(`Listening on http://${HOST}:${PORT}`);
   console.log(`API available at http://${HOST}:${PORT}/api`);
   console.log(`===============================================`);

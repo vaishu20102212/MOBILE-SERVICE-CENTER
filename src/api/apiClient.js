@@ -12,11 +12,11 @@ import {
 initializeLocalStore();
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 3000,
+  timeout: 4000,
 });
 
 // Intercept errors and provide seamless fallback to localStore so the app NEVER crashes with network errors
